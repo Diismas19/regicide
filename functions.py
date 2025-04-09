@@ -326,7 +326,8 @@ class Game:
         discard = []
         self.print_hand()
         if self.jester > 0:
-            a = input('You may use a jester now, if you want to, wanna use it?(y/n): ')
+            print('\n')
+            a = input('You may use a jester now, if you want to, wanna use it? (y/n): ')
             if a == 'y':
                 self.jester -= 1
                 self.solve_jester()
@@ -335,7 +336,7 @@ class Game:
                 print('\n')
                 while len(self.hand) > 0 and discard_value < num:
                     print('=======================================================')
-                    print(f'Your current discard is {discard_value}.')
+                    print(f'Your current discard is {discard_value}. You have to discard at least {num - discard_value} more in card value.')
                     print('\n')
                     self.print_hand()
                     print('\n')
@@ -408,7 +409,7 @@ class Game:
         self.show_board_state()
         if len(self.hand) == 0:
             if self.jester > 0:
-                a = input('Your hand is empity, wanna use a jester?(y/n) ')
+                a = input('Your hand is empity, wanna use a jester? (y/n): ')
                 if a == 'y':
                     self.jester -= 1
                     self.solve_jester()
