@@ -94,9 +94,10 @@ class Game:
     def print_top_castle(self):
         print(f'{self.castle[0][0]} {self.castle[0][1]}')
 
-    def print_len_tavern_cemetery(self):
+    def print_tavern_cemetery(self):
         print(f'The number of cards in the tavern is {len(self.tavern)}')
         print(f'The number of cards in the discard pile is {len(self.cemetery)}')
+        print(f'The top card of the cemetery is {self.cemetery[-1][0]} {self.cemetery[-1][1]}')
 
     def print_board(self):
         print('The cards on the board are:')
@@ -113,7 +114,7 @@ class Game:
             for list in self.board:
                 self.print_cards_in_list(list)
         print('\n')
-        self.print_len_tavern_cemetery()
+        self.print_tavern_cemetery()
         print('\n')
 
     def solve_hearts(self,num):
