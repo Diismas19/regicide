@@ -324,8 +324,8 @@ class Game:
     def discard(self, num):
         discard_value = 0
         discard = []
-        self.print_hand()
         if self.jester > 0:
+            self.print_hand()
             print('\n')
             a = input('You may use a jester now, if you want to, wanna use it? (y/n): ')
             if a == 'y':
@@ -365,10 +365,13 @@ class Game:
                 print('Choose a valid answer.')
                 self.discard(num)
         else:
-            while len(self.hand) > 0 or discard_value < num:
-                print(f'Your current discard is {discard_value}. You need to discard until {num}.')
+            print('\n')
+            while len(self.hand) > 0 and discard_value < num:
+                print('=======================================================')
+                print(f'Your current discard is {discard_value}. You have to discard at least {num - discard_value} more in card value.')
                 print('\n')
                 self.print_hand()
+                print('\n')
                 card = input('Choose a card to discard: ')
                 card = card.split()
                 if len(card) != 2: 
