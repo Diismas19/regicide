@@ -7,7 +7,6 @@ input("""Welcome leader, let's begin Operation Regicide.
 regicide = Game()
 
 while True:
-    regicide.hand = [('2','clubs'),('2','spades'),('2','hearts'),('2','diamonds')]
     regicide.play_card()
     if regicide.alive == False:
         print('The operation failed!')

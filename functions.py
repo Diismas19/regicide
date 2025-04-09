@@ -97,7 +97,8 @@ class Game:
     def print_tavern_cemetery(self):
         print(f'The number of cards in the tavern is {len(self.tavern)}')
         print(f'The number of cards in the discard pile is {len(self.cemetery)}')
-        print(f'The top card of the cemetery is {self.cemetery[-1][0]} {self.cemetery[-1][1]}')
+        if len(self.cemetery) > 0:
+            print(f'The top card of the cemetery is {self.cemetery[-1][0]} {self.cemetery[-1][1]}')
 
     def print_board(self):
         print('The cards on the board are:')
@@ -213,35 +214,38 @@ class Game:
             pass
 
     def check_combo(self, card):
-        total_value = 0
-        if card[0] == 'A':
-            total_value += 1
+        if card[0] == 'A' or card[0] == '2' or card[0] == '3' or card[0] == '4' or card[0] == '5':
+            total_value = 0
+            if card[0] == 'A':
+                total_value += 1
+            else:
+                total_value += int(card[0])
+            while True:
+                found = False
+                for other_card in self.hand:
+                    if card[0] == other_card[0]:
+                        if other_card[0] == 'A':
+                            next_value = 1
+                        else:
+                            next_value = int(other_card[0])
+                        if total_value + next_value > 10:
+                            break 
+                        a = input(f'You can play {other_card[0]} {other_card[1]}, wanna play it? (y/n): ')
+                        print('\n')
+                        if a == 'y':
+                            self.hand.remove(other_card)
+                            self.play.append(other_card)
+                            total_value += next_value
+                            found = True
+                            break 
+                        elif a == 'n':
+                            continue
+                        else:
+                            print('Invalid input')
+                if not found:
+                    break
         else:
-            total_value += int(card[0])
-        while True:
-            found = False
-            for other_card in self.hand:
-                if card[0] == other_card[0]:
-                    if other_card[0] == 'A':
-                        next_value = 1
-                    else:
-                        next_value = int(other_card[0])
-                    if total_value + next_value > 10:
-                        break 
-                    a = input(f'You can play {other_card[0]} {other_card[1]}, wanna play it? (y/n): ')
-                    print('\n')
-                    if a == 'y':
-                        self.hand.remove(other_card)
-                        self.play.append(other_card)
-                        total_value += next_value
-                        found = True
-                        break 
-                    elif a == 'n':
-                        continue
-                    else:
-                        print('Invalid input')
-            if not found:
-                break
+            pass
 
     def clean_board(self):
         for list in self.board:
