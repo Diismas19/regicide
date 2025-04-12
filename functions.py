@@ -107,8 +107,12 @@ class Game:
 
     def show_board_state(self):
         print('=======================================================')
-        print(f'The royal in top of the castle is:')
+        print(f'The current royal is:')
+        print('\n')
         self.print_top_castle()
+        royal = Card(self.castle[0][0],self.castle[0][1])
+        print(f"Its current life is: {royal.get_life() - self.get_board_damage()}")
+        print(f'Its current damage is: {self.get_royal_damage()}')
         if self.board != []:
             print('\n')
             print('Your current board is:')
